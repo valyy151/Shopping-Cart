@@ -1,4 +1,4 @@
-let items = [
+const items = [
   {
     name: "Ironhack T",
     price: 10,
@@ -24,30 +24,90 @@ let items = [
   },
 ];
 
-const products = document.getElementById("products");
-const cart = document.getElementById("cart");
-const productList = document.getElementById("productList");
-const cartList = document.getElementById("cartList");
+const products = document.querySelector("#products");
+const cart = document.querySelector("#cart");
+const productList = document.querySelector("#productList");
+const cartList = document.querySelector("#cartList");
 
-function showProducts() {
-  for (let i = 0; i > items.length; i++) {
-    let item = items[i];
+items.forEach((item) => {
+  const newName = document.createElement("p");
+  const newPrice = document.createElement("p");
+  const newImg = document.createElement("img");
+  const newLi = document.createElement("li");
+  const newButton = document.createElement("button");
 
-    let newName = document.createElement("p");
-    let newPrice = document.createElement("span");
-    let newImg = document.createElement("img");
-    let newLi = document.createElement("li");
+  newButton.innerText = "Add to Cart";
+  newButton.classList.add("button");
+  newName.innerText = item.name;
+  newPrice.innerText = `${item.price}$`;
+  newImg.src = item.image;
 
-    newName.textContent = item.name;
-    newPrice.textContent = `${item.price}$`;
-    newImg.textContent = item.image;
+  newLi.prepend(newButton);
+  newLi.prepend(newPrice);
+  newLi.prepend(newName);
+  newLi.prepend(newImg);
 
-    newLi.prepend(newName);
-    newLi.prepend(newPrice);
-    newLi.prepend(newImg);
+  productList.prepend(newLi);
+});
 
-    productList.prepend(newLi);
-  }
-}
+const buttons = document.getElementsByClassName("button");
+buttons[0].setAttribute("id", "first");
+buttons[1].setAttribute("id", "second");
+buttons[2].setAttribute("id", "third");
+buttons[3].setAttribute("id", "fourth");
 
-showProducts();
+const buttonOne = document.getElementById("first");
+const buttonTwo = document.getElementById("second");
+const buttonThree = document.getElementById("third");
+const buttonFour = document.getElementById("fourth");
+
+let count = 0;
+
+buttonOne.addEventListener(
+  "click",
+  () => {
+    cartList.prepend(buttonOne.parentElement);
+    buttonOne.innerText = "Remove from Cart";
+    buttonOne.setAttribute("id", "st");
+    count = count + parseInt(buttonOne.previousElementSibling.innerText);
+    h1.innerText = `Cart,  Total:${count}$`;
+  },
+  { once: true }
+);
+buttonTwo.addEventListener(
+  "click",
+  () => {
+    cartList.prepend(buttonTwo.parentElement);
+    buttonTwo.innerText = "Remove from Cart";
+    buttonTwo.setAttribute("id", "nd");
+    count = count + parseInt(buttonTwo.previousElementSibling.innerText);
+    h1.innerText = `Cart,  Total:${count}$`;
+  },
+  { once: true }
+);
+buttonThree.addEventListener(
+  "click",
+  () => {
+    cartList.prepend(buttonThree.parentElement);
+    buttonThree.innerText = "Remove from Cart";
+    buttonThree.setAttribute("id", "rd");
+    count = count + parseInt(buttonThree.previousElementSibling.innerText);
+    h1.innerText = `Cart,  Total:${count}$`;
+  },
+  { once: true }
+);
+buttonFour.addEventListener(
+  "click",
+  () => {
+    cartList.prepend(buttonFour.parentElement);
+    buttonFour.innerText = "Remove from Cart";
+    buttonFour.setAttribute("id", "th");
+    count = count + parseInt(buttonFour.previousElementSibling.innerText);
+    h1.innerText = `Cart,  Total:${count}$`;
+  },
+  { once: true }
+);
+
+const h1 = document.getElementById("h1");
+
+h1.innerText = `Cart,  Total:${count}$`;
