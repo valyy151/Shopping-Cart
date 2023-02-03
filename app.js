@@ -51,63 +51,15 @@ items.forEach((item) => {
 });
 
 const buttons = document.getElementsByClassName("button");
-buttons[0].setAttribute("id", "first");
-buttons[1].setAttribute("id", "second");
-buttons[2].setAttribute("id", "third");
-buttons[3].setAttribute("id", "fourth");
-
-const buttonOne = document.getElementById("first");
-const buttonTwo = document.getElementById("second");
-const buttonThree = document.getElementById("third");
-const buttonFour = document.getElementById("fourth");
-
-let count = 0;
-
-buttonOne.addEventListener(
-  "click",
-  () => {
-    cartList.prepend(buttonOne.parentElement);
-    buttonOne.innerText = "Remove from Cart";
-    buttonOne.setAttribute("id", "st");
-    count = count + parseInt(buttonOne.previousElementSibling.innerText);
-    h1.innerText = `Cart,  Total:${count}$`;
-  },
-  { once: true }
-);
-buttonTwo.addEventListener(
-  "click",
-  () => {
-    cartList.prepend(buttonTwo.parentElement);
-    buttonTwo.innerText = "Remove from Cart";
-    buttonTwo.setAttribute("id", "nd");
-    count = count + parseInt(buttonTwo.previousElementSibling.innerText);
-    h1.innerText = `Cart,  Total:${count}$`;
-  },
-  { once: true }
-);
-buttonThree.addEventListener(
-  "click",
-  () => {
-    cartList.prepend(buttonThree.parentElement);
-    buttonThree.innerText = "Remove from Cart";
-    buttonThree.setAttribute("id", "rd");
-    count = count + parseInt(buttonThree.previousElementSibling.innerText);
-    h1.innerText = `Cart,  Total:${count}$`;
-  },
-  { once: true }
-);
-buttonFour.addEventListener(
-  "click",
-  () => {
-    cartList.prepend(buttonFour.parentElement);
-    buttonFour.innerText = "Remove from Cart";
-    buttonFour.setAttribute("id", "th");
-    count = count + parseInt(buttonFour.previousElementSibling.innerText);
-    h1.innerText = `Cart,  Total:${count}$`;
-  },
-  { once: true }
-);
-
-const h1 = document.getElementById("h1");
-
-h1.innerText = `Cart,  Total:${count}$`;
+for (const button of buttons) {
+  button.addEventListener("click", function (event) {
+    const product = event.target.parentElement;
+    if (event.target.innerText === "Add to Cart") {
+      cartList.appendChild(product);
+      event.target.innerText = "Remove from Cart";
+    } else if (event.target.innerText === "Remove from Cart") {
+      productList.appendChild(product);
+      event.target.innerText = "Add to Cart";
+    }
+  });
+}
