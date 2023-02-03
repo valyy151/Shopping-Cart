@@ -28,6 +28,7 @@ const products = document.querySelector("#products");
 const cart = document.querySelector("#cart");
 const productList = document.querySelector("#productList");
 const cartList = document.querySelector("#cartList");
+const h2 = document.getElementById("h2");
 
 items.forEach((item) => {
   const newName = document.createElement("p");
@@ -50,16 +51,22 @@ items.forEach((item) => {
   productList.prepend(newLi);
 });
 
+let sum = 0;
 const buttons = document.getElementsByClassName("button");
+
 for (const button of buttons) {
   button.addEventListener("click", function (event) {
     const product = event.target.parentElement;
+    const price = parseInt(product.children[2].innerText.slice(0, -1));
     if (event.target.innerText === "Add to Cart") {
-      cartList.appendChild(product);
+      sum += price;
+      cartList.prepend(product);
       event.target.innerText = "Remove from Cart";
     } else if (event.target.innerText === "Remove from Cart") {
-      productList.appendChild(product);
+      sum -= price;
+      productList.prepend(product);
       event.target.innerText = "Add to Cart";
     }
+    h2.innerText = `Total: ${sum}$`;
   });
 }
